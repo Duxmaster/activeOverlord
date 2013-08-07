@@ -45,7 +45,7 @@ module.exports = {
 
       Activity.publishCreate({
         value: user.name,
-        action: ' has been created.'
+        action: ' has been created and logged in.'
       });
 
       res.redirect('/user/show/'+user.id);
