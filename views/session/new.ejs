@@ -1,0 +1,23 @@
+<div class="container">
+
+	<form action="/session/create" method="POST" class="form-signin">
+		<h2 class="form-signin-heading">Please sign in</h2>
+
+		<% if(typeof errors !== 'undefined') { %>
+		<div class = 'error-container'>
+		<h3>Errors</h3>
+		<ul class="error-messages">
+		<% Object.keys(errors).forEach(function(err) { %>
+		<li><%= err %>: <%= errors[err] %></li>
+		<% }); %>
+		</ul>
+		<% } %>
+
+		<input type="text" class="input-block-level" placeholder="Email address" name="email">
+		<input type="password" class="input-block-level" placeholder="Password" name="password">
+		<input type="submit" class="btn btn-large btn-primary" value="Sign-in"/>
+		<input type="hidden" name="_csrf" value="<%= _csrf %>" />
+		
+	</form>
+
+</div> <!-- /container -->
