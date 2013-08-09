@@ -48,7 +48,7 @@
               <ul class='nav'>
                 <% if (session.authenticated) { %>
                   <li class='active'>
-                    <a href="/user/show/<%= session.User.id %>">my profile</a>  
+                    <a href="/user/show/<%- session.User.id %>">my profile</a>  
                 </li>
                 <% } %>
                 <% if (session.User && session.User.admin) { %>
@@ -110,7 +110,7 @@
     -->
 
     <!--TEMPLATES-->
-    
+    <script type="text/javascript" src="/jst.js"></script>
     <!--TEMPLATES END-->
 
 
@@ -142,6 +142,7 @@
     <script src="/linker/js/app.js"></script>
     <script src="/linker/js/$.js"></script>
     <script src="/linker/js/bootstrap.js"></script>
+    <script src="/linker/js/underscore.js"></script>
     <!--SCRIPTS END-->
   </body>
 </html>

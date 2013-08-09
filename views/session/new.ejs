@@ -6,7 +6,7 @@
 		<% if(typeof errors !== 'undefined') { %>
 		<div class = 'error-container'>
 		<h3>Errors</h3>
-		<ul class="error-messages">
+		<ul class="error-messages alert alert-success">
 		<% Object.keys(errors).forEach(function(err) { %>
 		<li><%= err %>: <%= errors[err] %></li>
 		<% }); %>

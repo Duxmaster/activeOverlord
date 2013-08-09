@@ -68,7 +68,7 @@ module.exports = {
 		      		id: user.id
 			    });
 
-			    Activity.publishCreate({
+			    Activity.publishCreate( {
     				value: user.name,
     				action: ' has logged in.'
     			});

@@ -45,10 +45,13 @@
 		socket.get('/activity/find', function gotRecentActivity (activities) {
 			// TODO: hide loading spinner
 
-			console.log(activities);
+			// console.log(activities);
 			// TODO: Populate the activity feed with activities we found (in our AJAX response)
 			// e.g. $.fn.append
 		});
+
+		socket.get('/activity/newUsers', console.log.bind(console));
+
 
 	});
 
@@ -76,8 +79,9 @@
 );
 
 
+
 function slurpUsers() {
-	console.log('got to slurpUsers()');
+	// console.log('got to slurpUsers()');
 	var $users = $('[data-model="user"]');
 	var user_ids = [];
 	$users.each(function() {
@@ -94,7 +98,7 @@ function alertDomUserModelUpdated(message) {
 	// $("body").append("<div class='alert alert-success'>" + message.data.values.name + "</div>");
 	// $(".alert").fadeOut(5000);
 
-	console.log(message);
+	// console.log("This is the message", message);
 
 	$(".navbar").append("<div class='alert alert-success'>" + message.data.value + message.data.action + "</div>");
 	$(".alert").fadeOut(5000);
@@ -151,6 +155,16 @@ var UserIndexPage = {
 			//   var $userRow = $('tr[data-id="' + id+ '"]
 			// }
 		}
+	},
+
+	addUser: function(user) {
+		// var template = _.template(
+  //   	$( JST.addUserIt ).html()
+  // 	);
+
+  	$( 'tr:last' ).after(
+			JST['assets/linker/templates/addUserIt.ejs']( user )
+		);
 	}	
 };
 
@@ -159,7 +173,7 @@ var UserActivityPage = {
 	// Logic on how to update a user on the user index page
 	updateActivity: function(changes) {
 		
-		console.log('the changes are: ', changes);
+		// console.log('the changes are: ', changes);
 	}	
 };
 
@@ -174,7 +188,7 @@ var UserActivityPage = {
 
 	function cometMessageReceivedFromServer(message) {
 
-		console.log("here's the message: ", message);
+		 console.log("here's the message: ", message);
 
 		// Looks like this one is an update about a user
 		if (message.model === 'user' &&
@@ -196,8 +210,10 @@ var UserActivityPage = {
 		}
 
 		// If this is a new entry in the activity feed
-		else if (message.model === 'activity' &&
+		if (message.model === 'activity' &&
 				message.verb === 'create') {
+
+			// console.log("This is the message from comet", message.data);
 
 			// console.log('New comet message received :: ', message.data.value);
 
@@ -205,6 +221,18 @@ var UserActivityPage = {
 			alertDomUserModelUpdated(message);
 
 			// TODO: add it to the thing that shows activities
+		}
+
+		if (message.model === 'user' &&
+			message.verb === 'create') {
+
+			var addedUser = message.data;
+			UserIndexPage.addUser(addedUser);
+
+			console.log(addedUser);
+			console.log("Got to the comet message");
+
+			
 		}
 
 

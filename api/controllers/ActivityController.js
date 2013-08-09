@@ -20,9 +20,21 @@ module.exports = {
 
 			// Subcribe to anything that happens in activities...
 			Activity.subscribe(req.socket);
+
+			// Subscribe to anything that happens about Users
+			// User.subscribe(req.socket);
+
+			
+
+
 			// Activity.subscribe(req.socket, activities);
 			res.json(activities);
 		});
+	},
+
+	newUsers: function (req, res, next) {
+		User.subscribe(req.socket);
+		console.log("Now at the newUser Action.")
 	}
 
   /* e.g.

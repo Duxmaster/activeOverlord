@@ -43,10 +43,17 @@ module.exports = {
         admin: user.admin 
       };
 
+      // Let other's know whose logging in
       Activity.publishCreate({
         value: user.name,
         action: ' has been created and logged in.'
       });
+
+      // Let the index page know that a user was created.
+      User.publishCreate({
+        user: user
+      });
+
 
       res.redirect('/user/show/'+user.id);
     });
