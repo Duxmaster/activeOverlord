@@ -26,7 +26,21 @@ module.exports = {
 
   // render the sign-up view (e.g. /views/new.ejs)
   'new': function (req, res) {
+
+    // The reason we're using .clone is that req.flash = req.session.flash is just a reference
+    // req.flash = _clone(req.session.flash); actually creates a new instance of req.sesion.flash
+    // req.flash = _.clone(req.session.flash);
+
+    // // Then set the session variable to blank
+    // req.session.flash = {};
+
+    // // Then pass req.flash
+    // res.view({flash: req.flash});
+
     res.view();
+
+    // So the first time req.flash is blank.
+    // The second time req.flash below on line 52 has an object key of err
   },
 
   // process the sign-up form
@@ -34,8 +48,16 @@ module.exports = {
 
     // Create a User with the params sent from the sign-up form
     User.create( req.params.all(), function userCreated (err, user) {
-      if (err) return next(err);
+      // if (err) return next(err);
 
+      if (err) {
+        console.log(err);
+        req.session.flash = {
+          err: err
+        }
+
+        return res.redirect('/user/new');
+      }
       // Log user in
       req.session.authenticated = true;
       req.session.User = { 

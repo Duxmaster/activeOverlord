@@ -14,23 +14,23 @@ module.exports.policies = {
 
   // Default policy for all controllers and actions
   // (`true` allows public access) 
-  '*': true,
+  '*': "flash",
 
   session: {
-		'new': true,
-		create: true
+		// 'new': true,
+		// create: true
 	},
 
 	user: {
-		'new': true,
-		create: true,
+		// 'new': true,
+		// create: true,
 		index: 'admin',
 		show: ['canViewEditUpdateOwnUserProfile'],
 		edit: ['canViewEditUpdateOwnUserProfile'],
 
 		update: ['canViewEditUpdateOwnUserProfile','idSpecified'],
-		destroy: ['admin', 'idSpecified'],
-		activity: true
+		destroy: ['admin', 'idSpecified']
+		// activity: true
 	}
 
   /*

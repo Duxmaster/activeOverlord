@@ -13,6 +13,7 @@ module.exports = {
     name: {
       type: 'string',
       required: true
+      // minLength: 6
     },
 
     title: {
