@@ -15,67 +15,17 @@
 module.exports.adapters = {
 
   'default': 'mongo',
-
-  // mongo: {
-
-
-
-  //   module   : 'sails-mongo',
-  //   host     : 'localhost',
-  //   user     : 'admin',
-  //   password : '1234',
-  //   database : 'activeoverlord'
-
-  // }
-
+  
   mongo: {
-  // 'default': 'mongo',
-
-  // // // // sails v.0.9.0
-  // // // mongo: {
-  // // //   module   : 'sails-mongo',
-  // // //   host     : 'localhost',
-  // // //   user     : 'username',
-  // // //   password : 'password',
-  // // //   database : 'your mongo db name here'
+  
 
   //   // OR
     module   : 'sails-mongo',
-    url      : 'mongodb://admin:1234@dharma.mongohq.com:10007/activeoverlord',
+    url      : '',
 
     // Use this so that only the schema attributes are stored in mongo and not any and all
     // comers form the params
     schema   : true
   }
 
-  // sails v.0.8.x
-  // mongo: {
-  //   module   : 'sails-mongo',
-  //   url      : 'mongodb://USER:PASSWORD@HOST:PORT/DB'
-  // }
-
-  // If you leave the adapter config unspecified 
-  // in a model definition, 'default' will be used.
-  // 'default': 'mongo'
-
-  // // In-memory adapter for DEVELOPMENT ONLY
-  // memory: {
-  //   module: 'sails-memory'
-  // },
-
-  // // Persistent adapter for DEVELOPMENT ONLY
-  // // (data IS preserved when the server shuts down)
-  // disk: {
-  //   module: 'sails-disk'
-  // },
-
-  // // MySQL is the world's most popular relational database.
-  // // Learn more: http://en.wikipedia.org/wiki/MySQL
-  // mysql: {
-  //   module: 'sails-mysql',
-  //   host: 'localhost',
-  //   user: 'root',
-  //   password: '1234',
-  //   database: 'overlord'
-  // }
 };

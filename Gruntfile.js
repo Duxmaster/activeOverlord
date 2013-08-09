@@ -73,6 +73,8 @@ module.exports = function (grunt) {
    * edit the relevant sections below.
    */
 
+   // changed this from the default html
+
   var templateFilesToInject = [
     'linker/**/*.ejs'
   ];

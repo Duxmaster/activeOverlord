@@ -162,10 +162,16 @@ var UserIndexPage = {
   //   	$( JST.addUserIt ).html()
   // 	);
 
+	// This is the path to the templates file
   	$( 'tr:last' ).after(
 			JST['assets/linker/templates/addUserIt.ejs']( user )
 		);
-	}	
+	},
+
+	destroyUser: function(user) {
+		$('tr[data-id="' + user.id + '"]').remove();
+
+	}
 };
 
 var UserActivityPage = {
@@ -230,6 +236,18 @@ var UserActivityPage = {
 			UserIndexPage.addUser(addedUser);
 
 			console.log(addedUser);
+			console.log("Got to the comet message");
+
+			
+		}
+
+		if (message.model === 'user' &&
+			message.verb === 'destroy') {
+
+			var destroyedUser = message.data;
+			UserIndexPage.destroyUser(destroyedUser);
+
+			console.log(destoryedUser);
 			console.log("Got to the comet message");
 
 			

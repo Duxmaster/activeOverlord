@@ -110,6 +110,9 @@ module.exports = {
   destroy: function (req, res, next) {
 
     User.findOne(req.param('id'), function foundUser (err, user) {
+      if (err) return next(err);
+
+      if (!user) return next('User doesn\'t exist.');
 
       User.destroy(req.param('id'), function userDestroyed(err) {
         if (err) return next(err);
@@ -124,6 +127,13 @@ module.exports = {
             value: user.name,
             action: ' has been deleted.'
           });
+
+          console.log("This is at the destroy action for user.id", user.id);
+          console.log("This is at the destroy action for user.name", user.name);
+
+
+          // Let the index page know that a user was deleted.
+          User.publishDestroy({user: user});
       });
 
       res.redirect('/user');  
