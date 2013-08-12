@@ -58,6 +58,7 @@ module.exports = {
 
         return res.redirect('/user/new');
       }
+
       // Log user in
       req.session.authenticated = true;
       req.session.User = { 
@@ -75,7 +76,6 @@ module.exports = {
       User.publishCreate({
         user: user
       });
-
 
       res.redirect('/user/show/'+user.id);
     });
@@ -153,9 +153,11 @@ module.exports = {
           console.log("This is at the destroy action for user.id", user.id);
           console.log("This is at the destroy action for user.name", user.name);
 
+          console.log("a;lksdfjalk;dfjsa;lsfjkas;ldfj", user);
 
+          var id = '5205821e219667ca32000002'
           // Let the index page know that a user was deleted.
-          User.publishDestroy({user: user});
+          User.publishDestroy(user.id);
       });
 
       res.redirect('/user');  

@@ -168,8 +168,8 @@ var UserIndexPage = {
 		);
 	},
 
-	destroyUser: function(user) {
-		$('tr[data-id="' + user.id + '"]').remove();
+	destroyUser: function(id) {
+		$('tr[data-id="' + id + '"]').remove();
 
 	}
 };
@@ -244,10 +244,10 @@ var UserActivityPage = {
 		if (message.model === 'user' &&
 			message.verb === 'destroy') {
 
-			var destroyedUser = message.data;
+			var destroyedUser = message.id;
 			UserIndexPage.destroyUser(destroyedUser);
 
-			console.log(destoryedUser);
+			console.log(destroyedUser);
 			console.log("Got to the comet message");
 
 			

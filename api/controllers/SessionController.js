@@ -66,12 +66,12 @@ module.exports = {
 				User.publishUpdate( user.id, {
 		      		loggedIn: true,
 		      		id: user.id
-			    });
+			    }, req.socket);
 
 			    Activity.publishCreate( {
     				value: user.name,
     				action: ' has logged in.'
-    			});
+    			}, req.socket);
 
 					// If the user is also an admin redirect to the user list (e.g. /views/user/index.ejs)
 					// This is used in conjunction with config/policies.js file
