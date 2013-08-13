@@ -1,0 +1,36 @@
+<div class="container">
+	<h3>Activity</h3>
+	<table class='table'>
+		<tr>
+			<th>ChangedById</th>
+			<th>ChangedByName</th>
+			<th>ChangeType</th>
+			<th>ChangedUser</th>
+			<th>CreatedAt</th>
+			<th>UpdatedAt</th>
+			<th></th>
+			<th></th>
+		</tr>
+		
+
+		<% _.each(activities, function(activity) { %>
+			<td><%- activity.changedById %></td>
+			<td><%- activity.changedByName %></td>
+			<% if (activity.typeOfChange === 'login') { %>
+				<td><img src="/images/login.png"></td>
+			<% } else if (activity.typeOfChange === 'logout') { %>
+				<td> <img src="/images/logout.png"></td>
+			<% } else if (activity.typeOfChange === 'delete') { %>
+				<td><img src="/images/deletedUser.png"></td>
+			<% } else if (activity.typeOfChange === 'added') { %>
+				<td><img src="/images/addedUser.png"></td>
+			<% } else if (activity.typeOfChange === 'edited') { %>
+				<td><img src="/images/editedUser.png"></td>
+			<% } %>
+			<td><%- activity.changedUser %></td>
+			<td><%- activity.createdAt %></td>
+			<td><%- activity.updatedAt %></td>
+		</tr> 
+		<% }) %>
+	</table>
+</div>

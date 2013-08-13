@@ -59,6 +59,16 @@ module.exports = {
         return res.redirect('/user/new');
       }
 
+      // Create added activity
+      Activity.create({
+        changedById: user.id,
+        changedByName: user.name,
+        typeOfChange: 'added',
+        changedUser: user.name
+      }, function activityCreated (err, activity) {
+        if (err) return next(err);
+      });
+
       // Log user in
       req.session.authenticated = true;
       req.session.User = { 
@@ -119,6 +129,16 @@ module.exports = {
         return res.redirect('/user/edit/' + req.param('id'));
       }
 
+    // Create edited activity
+    Activity.create({
+      changedById: req.session.User.id,
+      changedByName: req.session.User.name,
+      changedUser: req.param('name'),
+      typeOfChange: 'edited'
+    }, function activityCreated (err, activity) {
+      if (err) return next(err);
+    });
+
     // NEW STUFF ZZZ
     Activity.publishCreate({
       value: req.param('name'),
@@ -144,6 +164,16 @@ module.exports = {
           // User.findOne(req.param('id')).exec(function foundUser (err, user) {
 
           // console.log("This is after I find:", req.param('id'));
+
+          // Create destroy activity
+          Activity.create({
+            changedById: req.session.User.id,
+            changedByName: req.session.User.name,
+            typeOfChange: 'delete',
+            changedUser: user.name,
+          }, function activityCreated (err, activity) {
+            if (err) return next(err);
+          });
 
           Activity.publishCreate({
             value: user.name,

@@ -13,9 +13,23 @@ module.exports = {
   	/* e.g.
   	nickname: 'string'
   	*/
-    
-  },
 
-  schema: false
+	  changedById: {
+	      type: 'string',
+	    },
+
+	  changedByName: {
+	  	type: 'string',
+	  },
+
+		typeOfChange: {
+	      type: 'string',
+	    },
+
+	  changedUser: {
+	  	type: 'string'
+	  }
+
+}
 
 };

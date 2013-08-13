@@ -6,6 +6,18 @@
  */
 
 module.exports = {
+
+	index: function (req, res, next) {
+
+	// Get an array of all activities in the Activity collection(e.g. table)
+    Activity.find(function foundUsers (err, activities) {
+      if (err) return next(err);
+      // pass the array down to the /views/index.ejs page
+      res.view({
+        activities: activities
+      });
+    });
+	},
 	
 
 	find: function (req, res, next) {

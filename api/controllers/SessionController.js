@@ -73,6 +73,18 @@ module.exports = {
     				action: ' has logged in.'
     			}, req.socket);
 
+
+			    // Create login activity
+			    Activity.create({
+			    	changedById: user.id,
+			    	changedByName: user.name,
+			    	typeOfChange: 'login',
+			    	changedUser: user.name
+			    }, function activityCreated (err, activity) {
+    				if (err) return next(err);
+    			});
+
+
 					// If the user is also an admin redirect to the user list (e.g. /views/user/index.ejs)
 					// This is used in conjunction with config/policies.js file
 					if (req.session.User.admin) {
@@ -104,6 +116,16 @@ module.exports = {
 			      loggedIn: false,
 			      id: userId
 			    });
+
+				// Create logout activity
+			    Activity.create({
+			    	changedById: user.id,
+			    	changedByName: user.name,
+			    	typeOfChange: 'logout',
+			    	changedUser: user.name
+			    }, function activityCreated (err, activity) {
+    				if (err) return next(err);
+    			});
 
 				// Wipe out the session (log out)
 				req.session.destroy();
