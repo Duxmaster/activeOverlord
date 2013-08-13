@@ -31,6 +31,10 @@ module.exports.policies = {
 		update: ['canViewEditUpdateOwnUserProfile','idSpecified'],
 		destroy: ['admin', 'idSpecified']
 		// activity: true
+	},
+
+	activity: {
+		index: 'admin'
 	}
 
   /*

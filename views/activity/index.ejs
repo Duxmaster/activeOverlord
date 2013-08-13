@@ -33,13 +33,23 @@
 		</tr> 
 		<% }) %>
 	</table>
-	This is the total activities: <%- activitiesTotal %>
 
 	<div class="pagination pull-right">
+	<div>
+	<% if (skip==='0') { %>
+		1 <b>of</b> <%- +skip+10 %></div>
+	<% } else { %>
+		<% if ((activitiesTotal - +skip )< 10) { %>
+			<%- skip %> <b>of</b> <%- activitiesTotal %></b></div>
+		<% } else { %>
+			<%- skip %> <b>of</b> <%- +skip+10 %></div>
+		<% } %>
+	<% } %>
+	<div><b>Total Activities:</b> <%- activitiesTotal %></div>
   <ul>
-    <li><a href="/activity?skip=0">1</a></li>
-    <li><a href="/activity?skip=10">2</a></li>
-    <li><a href="/activity?skip=20">3</a></li>
+  	<% for(var i=0; i<activitiesPages; i++) { %>
+    <li><a href="/activity?skip=<%= i*activitiesLimit %>"><%= i+1 %></a></li>
+    <% } %>
   </ul>
 </div>
 

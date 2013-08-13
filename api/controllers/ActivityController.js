@@ -16,14 +16,15 @@ module.exports = {
 
 
 			var skip = req.param('skip') || 0;
+			var activitiesLimit = 10;
+
 			// Get an array of all activities in the Activity collection(e.g. table)
 	    Activity.find()
-	    .limit(10)
+	    .limit(activitiesLimit)
 	    .skip(skip)
 	    .exec(function foundUsers (err, activities) {
 	      if (err) return next(err);
 
-	      var activitiesLimit = 10;
 	      var activitiesPages = parseInt(activitiesTotal/activitiesLimit);
 	      console.log("activitiesPages: ", activitiesPages);
 	      if (activitiesTotal%activitiesLimit > 0) {
@@ -39,7 +40,9 @@ module.exports = {
 	      res.view({
 	        activities: activities,
 	        activitiesTotal: activitiesTotal,
-	        activitiesPages: activitiesPages
+	        activitiesPages: activitiesPages,
+	        activitiesLimit: activitiesLimit,
+	        skip: skip
 	      });
 	    });
 		});
