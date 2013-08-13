@@ -9,14 +9,40 @@ module.exports = {
 
 	index: function (req, res, next) {
 
-	// Get an array of all activities in the Activity collection(e.g. table)
-    Activity.find(function foundUsers (err, activities) {
-      if (err) return next(err);
-      // pass the array down to the /views/index.ejs page
-      res.view({
-        activities: activities
-      });
-    });
+		Activity.count(function findAllActivities (err, total) {
+			if (err) return next(err);
+
+			var activitiesTotal = total;	
+
+
+			var skip = req.param('skip') || 0;
+			// Get an array of all activities in the Activity collection(e.g. table)
+	    Activity.find()
+	    .limit(10)
+	    .skip(skip)
+	    .exec(function foundUsers (err, activities) {
+	      if (err) return next(err);
+
+	      var activitiesLimit = 10;
+	      var activitiesPages = parseInt(activitiesTotal/activitiesLimit);
+	      console.log("activitiesPages: ", activitiesPages);
+	      if (activitiesTotal%activitiesLimit > 0) {
+	      	var activitiesRemainder = activitiesTotal%activitiesLimit;
+	      	activitiesPages++;
+	      	console.log("activitiesRemainder: ", activitiesRemainder);
+	      }
+
+	      console.log("activitiesPages: ", activitiesPages);
+	      console.log("Activities total: ", activitiesTotal);
+	      console.log("activitiesLimit: ", activitiesLimit);
+	      // pass the array down to the /views/index.ejs page
+	      res.view({
+	        activities: activities,
+	        activitiesTotal: activitiesTotal,
+	        activitiesPages: activitiesPages
+	      });
+	    });
+		});
 	},
 	
 

@@ -55,7 +55,13 @@
                   <li class='active'>
                     <a href="/user">list all users</a>  
                   </li>
+                <% } %>
+                  <% if (session.User && session.User.admin) { %>
+                  <li class='active'>
+                    <a href="/activity">activities</a>  
+                  </li>
                 <% } %>  
+
               </ul>
               <div class="nav pull-right">
                   <% if (session.authenticated) { %>
